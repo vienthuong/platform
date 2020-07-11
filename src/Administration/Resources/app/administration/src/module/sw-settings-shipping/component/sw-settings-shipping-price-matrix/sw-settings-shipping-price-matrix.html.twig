@@ -12,7 +12,7 @@
                 :closable="false">
                 {{ $tc('sw-settings-shipping.priceMatrix.newMatrixAlertMessage') }}
             </sw-alert>
-         {% endblock %}
+        {% endblock %}
         {% block sw_settings_shipping_price_matrix_topbar %}
             <sw-container columns="1fr 160px 35px"
                           gap="0px 24px"
@@ -225,6 +225,7 @@
                         {{ $tc('sw-settings-shipping.priceMatrix.emptyText') }}
                     </p>
                 {% endblock %}
+<<<<<<< HEAD
                 <sw-container columns="1fr 10px 1fr" gap="0px 24px">
                     {% block sw_settings_shipping_price_matrix_empty_property_store %}
                         <sw-single-select
@@ -236,27 +237,44 @@
                             :placeholder="$tc('sw-settings-shipping.priceMatrix.selectProperty')">
                         </sw-single-select>
                     {% endblock %}
+=======
+>>>>>>> 8ab55a20d0... Add Wrapper Block for sw-container element
 
-                    <p class="sw-settings-shipping-price-matrix__empty-text-or">
-                        {{ $tc('sw-settings-shipping.priceMatrix.textOr') }}
-                    </p>
+                {% block sw_settings_shipping_price_matrix_container %}
+                    <sw-container columns="1fr 10px 1fr" gap="0px 24px">
+                        {% block sw_settings_shipping_price_matrix_empty_property_store %}
+                            <sw-single-select
+                                class="sw-settings-shipping-price-matrix__empty--select-property"
+                                :options="calculationTypes"
+                                :value="priceGroup.calculation"
+                                @input="onCalculationChange"
+                                size="small"
+                                :placeholder="$tc('sw-settings-shipping.priceMatrix.selectProperty')">
+                            </sw-single-select>
+                        {% endblock %}
 
-                    {% block sw_settings_shipping_price_matrix_empty_rule_select %}
-                        <sw-select-rule-create
-                            size="small"
-                            :placeholder="$tc('sw-settings-shipping.priceMatrix.chooseCustomRule')"
-                            @save-rule="onSaveCustomShippingRule">
-                            <template #rule-modal="{ showRuleModal, onSaveRule, onCloseRuleModal }">
-                                <sw-price-rule-modal
-                                    v-if="showRuleModal"
-                                    @save="onSaveRule"
-                                    @modal-close="onCloseRuleModal"
-                                    :allowedRuleScopes="['cart', 'checkout', 'global', 'lineItem']">
-                                </sw-price-rule-modal>
-                            </template>
-                        </sw-select-rule-create>
-                    {% endblock %}
-                </sw-container>
+                        <p class="sw-settings-shipping-price-matrix__empty-text-or">
+                            {{ $tc('sw-settings-shipping.priceMatrix.textOr') }}
+                        </p>
+
+                        {% block sw_settings_shipping_price_matrix_empty_rule_select %}
+                            <sw-select-rule-create
+                                size="small"
+                                :placeholder="$tc('sw-settings-shipping.priceMatrix.chooseCustomRule')"
+                                @save-rule="onSaveCustomShippingRule">
+                                <template #rule-modal="{ showRuleModal, onSaveRule, onCloseRuleModal }">
+                                    <sw-price-rule-modal
+                                        v-if="showRuleModal"
+                                        @save="onSaveRule"
+                                        @modal-close="onCloseRuleModal"
+                                        :allowedRuleScopes="['cart', 'checkout', 'global', 'lineItem']">
+                                    </sw-price-rule-modal>
+                                </template>
+                            </sw-select-rule-create>
+                        {% endblock %}
+                    </sw-container>
+                {% endblock %}
+
             </div>
         {% endblock %}
 

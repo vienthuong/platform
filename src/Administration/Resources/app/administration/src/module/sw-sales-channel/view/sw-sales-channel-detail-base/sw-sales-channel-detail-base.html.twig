@@ -639,23 +639,26 @@
 
         {% block sw_sales_channel_detail_base_options_delete %}
             <sw-card :title="$tc('sw-sales-channel.detail.deleteModalTitle')" v-if="salesChannel" :isLoading="isLoading">
-                <sw-container columns="1fr 175px" gap="0px 30px" class="sw-sales-channel-detail-base__delete-sales-channel">
-                    <div class="sw-sales-channel-detail-base__description-text">
-                        <strong>{{ $tc('sw-sales-channel.detail.titleDeleteSalesChannelWarning') }}</strong>
-                        {{ $tc('sw-sales-channel.detail.textDeleteSalesChannelWarning') }}
-                    </div>
 
-                    {% block sw_sales_channel_detail_base_options_delete_button %}
-                    <div class="sw-sales-channel-detail-base__button-delete">
-                        <sw-button
-                            variant="danger"
-                            size="small"
-                            @click="showDeleteModal = true">
-                            {{ $tc('sw-sales-channel.detail.buttonDelete') }}
-                        </sw-button>
-                    </div>
-                    {% endblock %}
-                </sw-container>
+                {% block sw_sales_channel_detail_base_options_delete_container %}
+                    <sw-container columns="1fr 175px" gap="0px 30px" class="sw-sales-channel-detail-base__delete-sales-channel">
+                        <div class="sw-sales-channel-detail-base__description-text">
+                            <strong>{{ $tc('sw-sales-channel.detail.titleDeleteSalesChannelWarning') }}</strong>
+                            {{ $tc('sw-sales-channel.detail.textDeleteSalesChannelWarning') }}
+                        </div>
+
+                        {% block sw_sales_channel_detail_base_options_delete_button %}
+                        <div class="sw-sales-channel-detail-base__button-delete">
+                            <sw-button
+                                variant="danger"
+                                size="small"
+                                @click="showDeleteModal = true">
+                                {{ $tc('sw-sales-channel.detail.buttonDelete') }}
+                            </sw-button>
+                        </div>
+                        {% endblock %}
+                    </sw-container>
+                {% endblock %}
 
                 {% block sw_sales_channel_detail_base_options_delete_modal %}
                     <sw-modal

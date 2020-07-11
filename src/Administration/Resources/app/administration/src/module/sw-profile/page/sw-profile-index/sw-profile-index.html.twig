@@ -29,44 +29,49 @@
                         <sw-card class="sw-profile__card"
                                  :title="$tc('sw-profile.index.titleInfoCard')"
                                  :isLoading="isUserLoading || !languageId">
-                            <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0 30px">
-                                {% block sw_profile_index_info_card_first_name_field %}
-                                    <sw-text-field v-model="user.firstName"
-                                                   :label="$tc('sw-profile.index.labelFirstNameField')"
-                                                   :disabled="isDisabled">
-                                    </sw-text-field>
-                                {% endblock %}
 
-                                {% block sw_profile_index_info_card_last_name_field %}
-                                    <sw-text-field v-model="user.lastName"
-                                                   :label="$tc('sw-profile.index.labelLastNameField')"
-                                                   :disabled="isDisabled">
-                                    </sw-text-field>
-                                {% endblock %}
-                            </sw-container>
+                            {% block sw_profile_index_info_card_first_name_field_container %}
+                                <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0 30px">
+                                    {% block sw_profile_index_info_card_first_name_field %}
+                                        <sw-text-field v-model="user.firstName"
+                                                       :label="$tc('sw-profile.index.labelFirstNameField')"
+                                                       :disabled="isDisabled">
+                                        </sw-text-field>
+                                    {% endblock %}
 
-                            <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0 30px">
-                                {% block sw_profile_index_info_card_username_field %}
-                                    <sw-text-field v-model="user.username"
-                                                   :label="$tc('sw-profile.index.labelUsernameField')"
-                                                   :disabled="isDisabled">
-                                    </sw-text-field>
-                                {% endblock %}
+                                    {% block sw_profile_index_info_card_last_name_field %}
+                                        <sw-text-field v-model="user.lastName"
+                                                       :label="$tc('sw-profile.index.labelLastNameField')"
+                                                       :disabled="isDisabled">
+                                        </sw-text-field>
+                                    {% endblock %}
+                                </sw-container>
+                            {% endblock %}
 
-                                {% block sw_profile_index_info_card_language %}
-                                    <sw-select-field
-                                        v-model="user.localeId"
-                                        class="sw-profile__language"
-                                        :label="$tc('sw-settings-user.user-detail.labelLanguage')"
-                                        :placeholder="$tc('sw-settings-user.user-detail.labelLanguagePlaceholder')">
-                                        <option v-for="language in languages"
-                                                :value="language.locale.id"
-                                                :selected="user.localeId === language.locale.id">
-                                            {{ language.customLabel }}
-                                        </option>
-                                    </sw-select-field>
-                                {% endblock %}
-                            </sw-container>
+                            {% block sw_profile_index_info_card_username_field_container %}
+                                <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0 30px">
+                                    {% block sw_profile_index_info_card_username_field %}
+                                        <sw-text-field v-model="user.username"
+                                                       :label="$tc('sw-profile.index.labelUsernameField')"
+                                                       :disabled="isDisabled">
+                                        </sw-text-field>
+                                    {% endblock %}
+
+                                    {% block sw_profile_index_info_card_language %}
+                                        <sw-select-field
+                                            v-model="user.localeId"
+                                            class="sw-profile__language"
+                                            :label="$tc('sw-settings-user.user-detail.labelLanguage')"
+                                            :placeholder="$tc('sw-settings-user.user-detail.labelLanguagePlaceholder')">
+                                            <option v-for="language in languages"
+                                                    :value="language.locale.id"
+                                                    :selected="user.localeId === language.locale.id">
+                                                {{ language.customLabel }}
+                                            </option>
+                                        </sw-select-field>
+                                    {% endblock %}
+                                </sw-container>
+                            {% endblock %}
 
                             {% block sw_profile_index_info_card_email_field %}
                                 <sw-text-field

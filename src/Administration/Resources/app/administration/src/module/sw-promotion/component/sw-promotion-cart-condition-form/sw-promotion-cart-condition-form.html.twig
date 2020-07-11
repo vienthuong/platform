@@ -40,73 +40,82 @@
                     <div class="sw-promotion-cart-condition-form__setgroup-root-div"
                          v-for="(group, index) in promotion.setgroups"
                          :key="group.id">
-                        <sw-container columns="1fr 1fr" gap="0px 30px" align="end">
-                            {% block sw_promotion_cart_condition_setgroup_title %}
-                                <h5><strong>{{ $tc('sw-promotion.detail.main.preconditions.cart.setgroups.titleName') }} {{ index + 1 }}</strong></h5>
-                            {% endblock %}
-                            <div>
-                                {% block sw_promotion_cart_condition_setgroup_delete_button %}
-                                    <sw-button class="sw-promotion-cart-condition-form__setgroup-delete-button is--danger"
-                                               size="x-small"
-                                               @click="deleteSetGroup(group);"
-                                               :disabled="isEditingDisabled">
-                                        {{ $tc('sw-promotion.detail.main.preconditions.cart.setgroups.buttonDelete') }}
-                                    </sw-button>
+
+                        {% block sw_promotion_cart_condition_setgroup_container %}
+                            <sw-container columns="1fr 1fr" gap="0px 30px" align="end">
+                                {% block sw_promotion_cart_condition_setgroup_title %}
+                                    <h5><strong>{{ $tc('sw-promotion.detail.main.preconditions.cart.setgroups.titleName') }} {{ index + 1 }}</strong></h5>
                                 {% endblock %}
-                                {% block sw_promotion_cart_condition_setgroup_duplicate_button %}
-                                    <sw-button class="sw-promotion-cart-condition-form__setgroup-duplicate-button is--default"
-                                               size="x-small"
-                                               @click="duplicateSetGroup(group);"
-                                               :disabled="isEditingDisabled">
-                                        {{ $tc('sw-promotion.detail.main.preconditions.cart.setgroups.buttonDuplicate') }}
-                                    </sw-button>
+                                <div>
+                                    {% block sw_promotion_cart_condition_setgroup_delete_button %}
+                                        <sw-button class="sw-promotion-cart-condition-form__setgroup-delete-button is--danger"
+                                                   size="x-small"
+                                                   @click="deleteSetGroup(group);"
+                                                   :disabled="isEditingDisabled">
+                                            {{ $tc('sw-promotion.detail.main.preconditions.cart.setgroups.buttonDelete') }}
+                                        </sw-button>
+                                    {% endblock %}
+                                    {% block sw_promotion_cart_condition_setgroup_duplicate_button %}
+                                        <sw-button class="sw-promotion-cart-condition-form__setgroup-duplicate-button is--default"
+                                                   size="x-small"
+                                                   @click="duplicateSetGroup(group);"
+                                                   :disabled="isEditingDisabled">
+                                            {{ $tc('sw-promotion.detail.main.preconditions.cart.setgroups.buttonDuplicate') }}
+                                        </sw-button>
+                                    {% endblock %}
+                                </div>
+                            </sw-container>
+                        {% endblock %}
+
+                        {% block sw_promotion_cart_condition_setgroup_mode_field_container %}
+                            <sw-container columns="1fr 1fr" gap="0px 30px">
+                                {% block sw_promotion_cart_condition_setgroup_mode_field %}
+                                    <sw-select-field :label="$tc('sw-promotion.detail.main.preconditions.cart.setgroups.labelMode')"
+                                                     v-model="group.packagerKey"
+                                                     :disabled="isEditingDisabled">
+                                        <option v-for="packager in packagers"
+                                                :value="packager.key">
+                                            {{ packager.name }}
+                                        </option>
+                                    </sw-select-field>
                                 {% endblock %}
-                            </div>
-                        </sw-container>
+                                {% block sw_promotion_cart_condition_setgroup_value_field %}
+                                    <sw-field type="number"
+                                              :label="$tc('sw-promotion.detail.main.preconditions.cart.setgroups.labelValue')"
+                                              v-model="group.value"
+                                              :disabled="isEditingDisabled">
+                                    </sw-field>
+                                {% endblock %}
+                            </sw-container>
+                        {% endblock %}
 
-                        <sw-container columns="1fr 1fr" gap="0px 30px">
-                            {% block sw_promotion_cart_condition_setgroup_mode_field %}
-                                <sw-select-field :label="$tc('sw-promotion.detail.main.preconditions.cart.setgroups.labelMode')"
-                                                 v-model="group.packagerKey"
-                                                 :disabled="isEditingDisabled">
-                                    <option v-for="packager in packagers"
-                                            :value="packager.key">
-                                        {{ packager.name }}
-                                    </option>
-                                </sw-select-field>
-                            {% endblock %}
-                            {% block sw_promotion_cart_condition_setgroup_value_field %}
-                                <sw-field type="number"
-                                          :label="$tc('sw-promotion.detail.main.preconditions.cart.setgroups.labelValue')"
-                                          v-model="group.value"
-                                          :disabled="isEditingDisabled">
-                                </sw-field>
-                            {% endblock %}
-                        </sw-container>
+                        {% block sw_promotion_cart_condition_setgroup_sorting_field_container %}
+                            <sw-container columns="1fr 1fr" gap="0px 30px">
+                                {% block sw_promotion_cart_condition_setgroup_sorting_field %}
+                                    <sw-select-field :label="$tc('sw-promotion.detail.main.preconditions.cart.setgroups.labelSorting')"
+                                                     v-model="group.sorterKey"
+                                                     :disabled="isEditingDisabled">
+                                        <option v-for="sorter in sorters"
+                                                :value="sorter.key">
+                                            {{ sorter.name }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
+                            </sw-container>
+                        {% endblock %}
 
-                        <sw-container columns="1fr 1fr" gap="0px 30px">
-                            {% block sw_promotion_cart_condition_setgroup_sorting_field %}
-                                <sw-select-field :label="$tc('sw-promotion.detail.main.preconditions.cart.setgroups.labelSorting')"
-                                                 v-model="group.sorterKey"
-                                                 :disabled="isEditingDisabled">
-                                    <option v-for="sorter in sorters"
-                                            :value="sorter.key">
-                                        {{ sorter.name }}
-                                    </option>
-                                </sw-select-field>
-                            {% endblock %}
-                        </sw-container>
-
-                        <sw-container columns="1fr" gap="0px 30px">
-                            {% block sw_promotion_cart_condition_setgroup_rules_field %}
-                                <sw-promotion-rule-select :label="$tc('sw-promotion.detail.main.preconditions.cart.setgroups.labelRules')"
-                                                          class="sw-promotion-cart-condition-form__setgroup-rules"
-                                                          v-model="group.setGroupRules"
-                                                          :criteria="ruleFilter"
-                                                          :disabled="isEditingDisabled">
-                                </sw-promotion-rule-select>
-                            {% endblock %}
-                        </sw-container>
+                        {% block sw_promotion_cart_condition_setgroup_rules_field_container %}
+                            <sw-container columns="1fr" gap="0px 30px">
+                                {% block sw_promotion_cart_condition_setgroup_rules_field %}
+                                    <sw-promotion-rule-select :label="$tc('sw-promotion.detail.main.preconditions.cart.setgroups.labelRules')"
+                                                              class="sw-promotion-cart-condition-form__setgroup-rules"
+                                                              v-model="group.setGroupRules"
+                                                              :criteria="ruleFilter"
+                                                              :disabled="isEditingDisabled">
+                                    </sw-promotion-rule-select>
+                                {% endblock %}
+                            </sw-container>
+                        {% endblock %}
                     </div>
                 {% endblock %}
 

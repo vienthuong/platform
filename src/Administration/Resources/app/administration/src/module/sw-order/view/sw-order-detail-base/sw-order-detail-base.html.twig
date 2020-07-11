@@ -16,7 +16,7 @@
                                 @order-change="saveAndReload"
                                 @order-reset="recalculateAndReload"
                                 @error="$emit('error',$event)">
-                {% block  sw_order_detail_base_overview_status_change %}
+                {% block sw_order_detail_base_overview_status_change %}
                     <sw-container v-if="!isEditing"
                                   slot="additional-actions"
                                   columns="minmax(min-content, 1fr) minmax(min-content, 1fr) 1fr"
@@ -91,58 +91,62 @@
                         {% endblock %}
                         {% block sw_order_detail_base_line_items_summary %}
                             <sw-card-section divider="top" secondary slim>
-                                <sw-container columns="1fr 440px"
-                                              class="sw-order-detail__summary">
-                                    <sw-description-list grid="265px 1fr"
-                                                         v-if="!isLoading"
-                                                         class="sw-order-detail__summary-data">
-                                        {% block sw_order_detail_base_line_items_summary_entries %}
-                                            {% block sw_order_detail_base_line_items_summary_amount %}
-                                                <dt>{{ $tc('sw-order.detailBase.summaryLabelAmount') }}</dt>
-                                                <dd>{{ order.positionPrice | currency(order.currency.translated.shortName) }}</dd>
-                                            {% endblock %}
 
-                                            {% block sw_order_detail_base_line_items_summary_shipping_cost %}
-                                                <template v-if="delivery">
-                                                    <dt>{{ $tc('sw-order.detailBase.summaryLabelShippingCosts') }}</dt>
-                                                    <dd>
-                                                        <sw-order-saveable-field type="number"
-                                                                                 v-tooltip="{showDelay: 300, message: shippingCostsDetail}"
-                                                                                 :editable="isEditing"
-                                                                                 :value="delivery.shippingCosts.totalPrice"
-                                                                                 @value-change="onShippingChargeEdited">
-                                                            {{ delivery.shippingCosts.totalPrice | currency(order.currency.translated.shortName) }}
-                                                        </sw-order-saveable-field>
-                                                    </dd>
-                                                </template>
-                                                <template v-if="deliveryDiscounts" v-for="delivery in deliveryDiscounts">
-                                                    <dt>{{ $tc('sw-order.detailBase.discountLabelShippingCosts') }}</dt>
-                                                    <dd>{{ delivery.shippingCosts.totalPrice | currency(order.currency.translated.shortName) }}</dd>
-                                                </template>
-                                            {% endblock %}
+                                {% block sw_order_detail_base_line_items_summary_container %}
+                                    <sw-container columns="1fr 440px"
+                                                  class="sw-order-detail__summary">
+                                        <sw-description-list grid="265px 1fr"
+                                                             v-if="!isLoading"
+                                                             class="sw-order-detail__summary-data">
+                                            {% block sw_order_detail_base_line_items_summary_entries %}
+                                                {% block sw_order_detail_base_line_items_summary_amount %}
+                                                    <dt>{{ $tc('sw-order.detailBase.summaryLabelAmount') }}</dt>
+                                                    <dd>{{ order.positionPrice | currency(order.currency.translated.shortName) }}</dd>
+                                                {% endblock %}
 
-                                            {% block sw_order_detail_base_line_items_summary_amount_without_tax %}
-                                                <dt><strong>{{ $tc('sw-order.detailBase.summaryLabelAmountWithoutTaxes') }}</strong></dt>
-                                                <dd><strong>{{ order.amountNet | currency(order.currency.translated.shortName) }}</strong></dd>
-                                            {% endblock %}
+                                                {% block sw_order_detail_base_line_items_summary_shipping_cost %}
+                                                    <template v-if="delivery">
+                                                        <dt>{{ $tc('sw-order.detailBase.summaryLabelShippingCosts') }}</dt>
+                                                        <dd>
+                                                            <sw-order-saveable-field type="number"
+                                                                                     v-tooltip="{showDelay: 300, message: shippingCostsDetail}"
+                                                                                     :editable="isEditing"
+                                                                                     :value="delivery.shippingCosts.totalPrice"
+                                                                                     @value-change="onShippingChargeEdited">
+                                                                {{ delivery.shippingCosts.totalPrice | currency(order.currency.translated.shortName) }}
+                                                            </sw-order-saveable-field>
+                                                        </dd>
+                                                    </template>
+                                                    <template v-if="deliveryDiscounts" v-for="delivery in deliveryDiscounts">
+                                                        <dt>{{ $tc('sw-order.detailBase.discountLabelShippingCosts') }}</dt>
+                                                        <dd>{{ delivery.shippingCosts.totalPrice | currency(order.currency.translated.shortName) }}</dd>
+                                                    </template>
+                                                {% endblock %}
 
-                                            {% block sw_order_detail_base_line_items_summary_taxes %}
-                                                <template v-for="calculatedTax in sortedCalculatedTaxes">
-                                                    <dt>{{ $tc('sw-order.detailBase.summaryLabelTaxes', 1, { taxRate: calculatedTax.taxRate }) }}</dt>
-                                                    <dd>{{ calculatedTax.tax | currency(order.currency.translated.shortName) }}</dd>
-                                                </template>
-                                            {% endblock %}
+                                                {% block sw_order_detail_base_line_items_summary_amount_without_tax %}
+                                                    <dt><strong>{{ $tc('sw-order.detailBase.summaryLabelAmountWithoutTaxes') }}</strong></dt>
+                                                    <dd><strong>{{ order.amountNet | currency(order.currency.translated.shortName) }}</strong></dd>
+                                                {% endblock %}
 
-                                            {% block sw_order_detail_base_line_items_summary_slot %}
-                                            {% endblock %}
+                                                {% block sw_order_detail_base_line_items_summary_taxes %}
+                                                    <template v-for="calculatedTax in sortedCalculatedTaxes">
+                                                        <dt>{{ $tc('sw-order.detailBase.summaryLabelTaxes', 1, { taxRate: calculatedTax.taxRate }) }}</dt>
+                                                        <dd>{{ calculatedTax.tax | currency(order.currency.translated.shortName) }}</dd>
+                                                    </template>
+                                                {% endblock %}
 
-                                            {% block sw_order_detail_base_line_items_summary_amount_total %}
-                                                <dt><strong>{{ $tc('sw-order.detailBase.summaryLabelAmountTotal') }}</strong></dt>
-                                                <dd><strong>{{ order.amountTotal | currency(order.currency.shortName) }}</strong></dd>
+                                                {% block sw_order_detail_base_line_items_summary_slot %}
+                                                {% endblock %}
+
+                                                {% block sw_order_detail_base_line_items_summary_amount_total %}
+                                                    <dt><strong>{{ $tc('sw-order.detailBase.summaryLabelAmountTotal') }}</strong></dt>
+                                                    <dd><strong>{{ order.amountTotal | currency(order.currency.shortName) }}</strong></dd>
+                                                {% endblock %}
                                             {% endblock %}
-                                        {% endblock %}
-                                    </sw-description-list>
-                                </sw-container>
+                                        </sw-description-list>
+                                    </sw-container>
+                                {% endblock %}
+
                             </sw-card-section>
                         {% endblock %}
                     </sw-container>

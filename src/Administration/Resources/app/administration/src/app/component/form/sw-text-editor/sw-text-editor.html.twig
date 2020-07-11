@@ -58,9 +58,13 @@
 
                 {% block sw_text_editor_box_word_count %}
                     <div v-if="!isInlineEdit && !isCodeEdit" class="sw-text-editor__word_count">
-                        <sw-container columns="1fr" justify="right">
-                            <span class="sw-text-editor__text-length">{{ $tc('global.sw-text-editor.labelTextLength', textLength, { count: textLength }) }}</span>
-                        </sw-container>
+
+                        {% block sw_text_editor_box_word_count_text_editor_container %}
+                            <sw-container columns="1fr" justify="right">
+                                <span class="sw-text-editor__text-length">{{ $tc('global.sw-text-editor.labelTextLength', textLength, { count: textLength }) }}</span>
+                            </sw-container>
+                        {% endblock %}
+
                     </div>
                 {% endblock %}
             </div>
