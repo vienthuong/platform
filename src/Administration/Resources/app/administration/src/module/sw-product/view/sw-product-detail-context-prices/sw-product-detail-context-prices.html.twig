@@ -21,53 +21,60 @@
 
                     {% block sw_product_detail_prices_price_card_toolbar %}
                         <div class="sw-product-detail-context-prices__toolbar">
-                            <sw-container columns="1fr minmax(50px, max-content) minmax(50px, max-content)" gap="0 10px">
 
-                                {% block sw_product_detail_prices_price_card_toolbar_rule_selection %}
-                                    <sw-entity-single-select
-                                            class="sw-product-detail-context-prices__toolbar-selection"
-                                            v-if="rules.entity"
-                                            id="rule"
-                                            size="small"
-                                            :value="priceGroup.ruleId"
-                                            :placeholder="$tc('sw-product.advancedPrices.selectRule')"
-                                            @change="onRuleChange($event, priceGroup.ruleId)"
-                                            :entity="rules.entity">
-                                        <template #result-item="{ isSelected, setValue, item, index, labelProperty, searchTerm, highlightSearchTerm, getKey }">
-                                            <li is="sw-select-result"
-                                                :selected="isSelected(item)"
-                                                :disabled="!!priceRuleGroups[item.id]"
-                                                @item-select="setValue"
-                                                v-bind="{ item, index }">
-                                                <sw-highlight-text v-if="highlightSearchTerm"
-                                                                   :text="getKey(item, labelProperty) || getKey(item, `translated.${labelProperty}`)"
-                                                                   :searchTerm="searchTerm">
-                                                </sw-highlight-text>
-                                                <template v-else>
-                                                    {{ getKey(item, labelProperty) || getKey(item, `translated.${labelProperty}`) }}
+                            {% block sw_product_detail_prices_price_card_toolbar_container %}
+                                <sw-container columns="1fr minmax(50px, max-content) minmax(50px, max-content)" gap="0 10px">
+
+                                    {% block sw_product_detail_prices_price_card_toolbar_rule_selection %}
+                                        <sw-entity-single-select
+                                                class="sw-product-detail-context-prices__toolbar-selection"
+                                                v-if="rules.entity"
+                                                id="rule"
+                                                size="small"
+                                                :value="priceGroup.ruleId"
+                                                :placeholder="$tc('sw-product.advancedPrices.selectRule')"
+                                                @change="onRuleChange($event, priceGroup.ruleId)"
+                                                :entity="rules.entity">
+
+                                            {% block sw_product_detail_prices_price_card_toolbar_rule_selection_result_item %}
+                                                <template #result-item="{ isSelected, setValue, item, index, labelProperty, searchTerm, highlightSearchTerm, getKey }">
+                                                    <li is="sw-select-result"
+                                                        :selected="isSelected(item)"
+                                                        :disabled="!!priceRuleGroups[item.id]"
+                                                        @item-select="setValue"
+                                                        v-bind="{ item, index }">
+                                                        <sw-highlight-text v-if="highlightSearchTerm"
+                                                                           :text="getKey(item, labelProperty) || getKey(item, `translated.${labelProperty}`)"
+                                                                           :searchTerm="searchTerm">
+                                                        </sw-highlight-text>
+                                                        <template v-else>
+                                                            {{ getKey(item, labelProperty) || getKey(item, `translated.${labelProperty}`) }}
+                                                        </template>
+                                                    </li>
                                                 </template>
-                                            </li>
-                                        </template>
-                                    </sw-entity-single-select>
-                                {% endblock %}
+                                            {% endblock %}
 
-                                {% block sw_product_detail_prices_price_card_toolbar_rule_delete %}
-                                    <sw-button @click="onPriceGroupDelete(priceGroup.ruleId)" size="small">
-                                        {{ $tc('sw-product.prices.buttonPriceRuleDelete') }}
-                                    </sw-button>
-                                {% endblock %}
+                                        </sw-entity-single-select>
+                                    {% endblock %}
 
-                                {% block sw_product_detail_prices_price_card_toolbar_add_price_rule %}
-                                    <sw-button v-if="canAddPriceRule"
-                                               size="small"
-                                               class="sw-product-detail-context-prices__toolbar-duplicate"
-                                               @click="onPriceGroupDuplicate(priceGroup)"
-                                               :disabled="priceGroup.ruleId === null">
-                                        {{ $tc('sw-product.prices.buttonPriceRuleDuplicate') }}
-                                    </sw-button>
-                                {% endblock %}
+                                    {% block sw_product_detail_prices_price_card_toolbar_rule_delete %}
+                                        <sw-button @click="onPriceGroupDelete(priceGroup.ruleId)" size="small">
+                                            {{ $tc('sw-product.prices.buttonPriceRuleDelete') }}
+                                        </sw-button>
+                                    {% endblock %}
 
-                            </sw-container>
+                                    {% block sw_product_detail_prices_price_card_toolbar_add_price_rule %}
+                                        <sw-button v-if="canAddPriceRule"
+                                                   size="small"
+                                                   class="sw-product-detail-context-prices__toolbar-duplicate"
+                                                   @click="onPriceGroupDuplicate(priceGroup)"
+                                                   :disabled="priceGroup.ruleId === null">
+                                            {{ $tc('sw-product.prices.buttonPriceRuleDuplicate') }}
+                                        </sw-button>
+                                    {% endblock %}
+
+                                </sw-container>
+                            {% endblock %}
                         </div>
                     {% endblock %}
 

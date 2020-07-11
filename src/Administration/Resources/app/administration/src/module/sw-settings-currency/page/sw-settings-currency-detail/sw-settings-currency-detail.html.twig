@@ -51,69 +51,72 @@
 
                 {% block sw_settings_currency_detail_content_card %}
                     <sw-card :title="$tc('sw-settings-currency.detail.titleCard')">
-                        <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0px 30px">
+                        {% block sw_settings_currency_detail_content_card_container %}
+                            <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0px 30px">
 
-                            {% block sw_settings_currency_detail_content_field_name %}
-                                <sw-field type="text"
-                                          required
-                                          :label="$tc('sw-settings-currency.detail.labelName')"
-                                          :placeholder="placeholder(currency, 'name', $tc('sw-settings-currency.detail.placeholderName'))"
-                                          :error="currencyNameError"
-                                          v-model="currency.name">
-                                </sw-field>
-                            {% endblock %}
+                                {% block sw_settings_currency_detail_content_field_name %}
+                                    <sw-field type="text"
+                                              required
+                                              :label="$tc('sw-settings-currency.detail.labelName')"
+                                              :placeholder="placeholder(currency, 'name', $tc('sw-settings-currency.detail.placeholderName'))"
+                                              :error="currencyNameError"
+                                              v-model="currency.name">
+                                    </sw-field>
+                                {% endblock %}
 
-                            {% block sw_settings_currency_detail_content_field_iso_code %}
-                                <sw-field type="text"
-                                          required
-                                          :label="$tc('sw-settings-currency.detail.labelIsoCode')"
-                                          :placeholder="placeholder(currency, 'isoCode', $tc('sw-settings-currency.detail.placeholderIsoCode'))"
-                                          :error="currencyIsoCodeError"
-                                          v-model="currency.isoCode">
-                                </sw-field>
-                            {% endblock %}
+                                {% block sw_settings_currency_detail_content_field_iso_code %}
+                                    <sw-field type="text"
+                                              required
+                                              :label="$tc('sw-settings-currency.detail.labelIsoCode')"
+                                              :placeholder="placeholder(currency, 'isoCode', $tc('sw-settings-currency.detail.placeholderIsoCode'))"
+                                              :error="currencyIsoCodeError"
+                                              v-model="currency.isoCode">
+                                    </sw-field>
+                                {% endblock %}
 
-                            {% block sw_settings_currency_detail_content_field_short_name %}
-                                <sw-field type="text"
-                                          required
-                                          :label="$tc('sw-settings-currency.detail.labelShortName')"
-                                          :placeholder="placeholder(currency, 'shortName', $tc('sw-settings-currency.detail.placeholderShortName'))"
-                                          :error="currencyShortNameError"
-                                          v-model="currency.shortName">
-                                </sw-field>
-                            {% endblock %}
+                                {% block sw_settings_currency_detail_content_field_short_name %}
+                                    <sw-field type="text"
+                                              required
+                                              :label="$tc('sw-settings-currency.detail.labelShortName')"
+                                              :placeholder="placeholder(currency, 'shortName', $tc('sw-settings-currency.detail.placeholderShortName'))"
+                                              :error="currencyShortNameError"
+                                              v-model="currency.shortName">
+                                    </sw-field>
+                                {% endblock %}
 
-                            {% block sw_settings_currency_detail_content_field_symbol %}
-                                <sw-field type="text"
-                                          required
-                                          :label="$tc('sw-settings-currency.detail.labelSymbol')"
-                                          :placeholder="$tc('sw-settings-currency.detail.placeholderSymbol')"
-                                          :error="currencySymbolError"
-                                          v-model="currency.symbol">
-                                </sw-field>
-                            {% endblock %}
+                                {% block sw_settings_currency_detail_content_field_symbol %}
+                                    <sw-field type="text"
+                                              required
+                                              :label="$tc('sw-settings-currency.detail.labelSymbol')"
+                                              :placeholder="$tc('sw-settings-currency.detail.placeholderSymbol')"
+                                              :error="currencySymbolError"
+                                              v-model="currency.symbol">
+                                    </sw-field>
+                                {% endblock %}
 
-                            {% block sw_settings_currency_detail_content_field_factor %}
-                                <sw-number-field required
-                                                 :digits="14"
-                                                 :label="$tc('sw-settings-currency.detail.labelFactor')"
-                                                 :placeholder="$tc('sw-settings-currency.detail.placeholderFactor')"
-                                                 :error="currencyFactorError"
-                                                 v-model="currency.factor"
-                                                 :disabled="currency.isSystemDefault">
-                                </sw-number-field>
-                            {% endblock %}
+                                {% block sw_settings_currency_detail_content_field_factor %}
+                                    <sw-number-field required
+                                                     :digits="14"
+                                                     :label="$tc('sw-settings-currency.detail.labelFactor')"
+                                                     :placeholder="$tc('sw-settings-currency.detail.placeholderFactor')"
+                                                     :error="currencyFactorError"
+                                                     v-model="currency.factor"
+                                                     :disabled="currency.isSystemDefault">
+                                    </sw-number-field>
+                                {% endblock %}
 
-                            {% block sw_settings_currency_detail_content_field_decimal_precision %}
-                                <sw-field type="number"
-                                          required
-                                          :label="$tc('sw-settings-currency.detail.labelPrecision')"
-                                          :placeholder="$tc('sw-settings-currency.detail.placeholderPrecision')"
-                                          :error="currencyDecimalPrecisionError"
-                                          v-model="currency.decimalPrecision">
-                                </sw-field>
-                            {% endblock %}
-                        </sw-container>
+                                {% block sw_settings_currency_detail_content_field_decimal_precision %}
+                                    <sw-field type="number"
+                                              required
+                                              :label="$tc('sw-settings-currency.detail.labelPrecision')"
+                                              :placeholder="$tc('sw-settings-currency.detail.placeholderPrecision')"
+                                              :error="currencyDecimalPrecisionError"
+                                              v-model="currency.decimalPrecision">
+                                    </sw-field>
+                                {% endblock %}
+                            </sw-container>
+                        {% endblock %}
+
                     </sw-card>
                 {% endblock %}
             </sw-card-view>

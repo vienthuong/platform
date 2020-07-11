@@ -59,7 +59,7 @@
 
                             {% block sw_order_detail_base_info_summary %}
                                 <div class="sw-order-user-card__info-summary">
-                                    {% block  sw_order_detail_base_info_summary_entries %}
+                                    {% block sw_order_detail_base_info_summary_entries %}
                                         <div class="sw-order-user-card__metadata-price">
                                             {{ currentOrder.amountTotal | currency(currentOrder.currency.translated.shortName) }}
                                         </div>

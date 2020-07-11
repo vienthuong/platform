@@ -19,7 +19,7 @@
             {% endblock %}
 
             {% block sw_tabs_arrow_right %}
-                <button v-if="isScrollable" class="sw-tabs__arrow sw-tabs__arrow--right" :class="arrowClassesRight" @click="scrollTo('right')">
+                <button v-if="isScrollable" class="sw-tabs__arrow sw-tabs__arrow--right" :class="arrowClassesRight" :title="'hello'" id="12312" href="345345345" @change="() => {console.log(123123)}" @click="scrollTo('right')">
                     <sw-icon name="small-arrow-medium-right" small></sw-icon>
                 </button>
             {% endblock %}

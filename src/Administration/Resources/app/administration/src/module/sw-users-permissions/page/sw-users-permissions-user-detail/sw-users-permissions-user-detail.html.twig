@@ -314,22 +314,24 @@
                             <div class="sw-field">
                                 <label>{{ $tc('sw-users-permissions.users.user-detail.modal.permissions') }}</label>
 
-                                <sw-container columns="repeat(auto-fit, minmax(200px, 1fr))">
-                                    {% block sw_settings_user_detail_detail_modal_inner_field_read_access %}
-                                        <sw-field :label="$tc('sw-users-permissions.users.user-detail.modal.readAccessFieldLabel')"
-                                                  :value="true"
-                                                  disabled="disabled"
-                                                  type="checkbox">
-                                        </sw-field>
-                                    {% endblock %}
+                                {% block sw_settings_user_detail_detail_modal_inner_field_container %}
+                                    <sw-container columns="repeat(auto-fit, minmax(200px, 1fr))">
+                                        {% block sw_settings_user_detail_detail_modal_inner_field_read_access %}
+                                            <sw-field :label="$tc('sw-users-permissions.users.user-detail.modal.readAccessFieldLabel')"
+                                                      :value="true"
+                                                      disabled="disabled"
+                                                      type="checkbox">
+                                            </sw-field>
+                                        {% endblock %}
 
-                                    {% block sw_settings_user_detail_detail_modal_inner_field_write_access %}
-                                        <sw-field :label="$tc('sw-users-permissions.users.user-detail.modal.writeAccessFieldLabel')"
-                                                  type="checkbox"
-                                                  v-model="currentIntegration.writeAccess">
-                                        </sw-field>
-                                    {% endblock %}
-                                </sw-container>
+                                        {% block sw_settings_user_detail_detail_modal_inner_field_write_access %}
+                                            <sw-field :label="$tc('sw-users-permissions.users.user-detail.modal.writeAccessFieldLabel')"
+                                                      type="checkbox"
+                                                      v-model="currentIntegration.writeAccess">
+                                            </sw-field>
+                                        {% endblock %}
+                                    </sw-container>
+                                {% endblock %}
                             </div>
 
                             {% block sw_settings_user_detail_detail_modal_inner_field_access_key %}

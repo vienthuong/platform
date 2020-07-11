@@ -17,51 +17,55 @@
                         </div>
                     {% endblock %}
 
-                    <sw-container columns="2fr 1fr" gap="0px 30px" align="start">
-                        {% block sw_prduct_cross_selling_form_title_field %}
-                            <sw-text-field
-                                :label="$tc('sw-product.crossselling.inputCrossSellingTitle')"
-                                required
-                                :placeholder="$tc('sw-product.crossselling.inputCrossSellingTitlePlaceholder')"
-                                v-model="crossSelling.name"
-                                :error="crossSellingNameError">
-                            </sw-text-field>
-                        {% endblock %}
-                        {% block sw_prduct_cross_selling_form_active_field %}
-                            <sw-field
-                                type="switch"
-                                class="sw-product-detail-cross-selling__active-switch"
-                                :label="$tc('sw-product.crossselling.inputCrossSellingActive')"
-                                v-model="crossSelling.active">
-                            </sw-field>
-                        {% endblock %}
-                    </sw-container>
+                    {% block sw_prduct_cross_selling_form_title_field_container %}
+                        <sw-container columns="2fr 1fr" gap="0px 30px" align="start">
+                            {% block sw_prduct_cross_selling_form_title_field %}
+                                <sw-text-field
+                                    :label="$tc('sw-product.crossselling.inputCrossSellingTitle')"
+                                    required
+                                    :placeholder="$tc('sw-product.crossselling.inputCrossSellingTitlePlaceholder')"
+                                    v-model="crossSelling.name"
+                                    :error="crossSellingNameError">
+                                </sw-text-field>
+                            {% endblock %}
+                            {% block sw_prduct_cross_selling_form_active_field %}
+                                <sw-field
+                                    type="switch"
+                                    class="sw-product-detail-cross-selling__active-switch"
+                                    :label="$tc('sw-product.crossselling.inputCrossSellingActive')"
+                                    v-model="crossSelling.active">
+                                </sw-field>
+                            {% endblock %}
+                        </sw-container>
+                    {% endblock %}
 
-                    <sw-container columns="2fr 1fr" gap="0px 30px">
-                        {% block sw_prduct_cross_selling_form_type %}
-                            <sw-select-field
-                                :label="$tc('sw-product.crossselling.inputCrossSellingType')"
-                                @change="onTypeChanged"
-                                :error="crossSellingTypeError"
-                                v-model="crossSelling.type">
-                                <option v-for="option in crossSellingTypes"
-                                        :key="option.value"
-                                        :value="option.value">
-                                    {{ option.label }}
-                                </option>
-                            </sw-select-field>
-                        {% endblock %}
-                        {% block sw_prduct_cross_selling_form_position_field %}
-                            <sw-number-field
-                                numberType="int"
-                                :min="1"
-                                :label="$tc('sw-product.crossselling.inputCrossSellingPosition')"
-                                :error="crossSellingPositionError"
-                                :placeholder="$tc('sw-product.crossselling.inputCrossSellingPositionPlaceholder')"
-                                v-model="crossSelling.position">
-                            </sw-number-field>
-                        {% endblock %}
-                    </sw-container>
+                    {% block sw_prduct_cross_selling_form_type_container %}
+                        <sw-container columns="2fr 1fr" gap="0px 30px">
+                            {% block sw_prduct_cross_selling_form_type %}
+                                <sw-select-field
+                                    :label="$tc('sw-product.crossselling.inputCrossSellingType')"
+                                    @change="onTypeChanged"
+                                    :error="crossSellingTypeError"
+                                    v-model="crossSelling.type">
+                                    <option v-for="option in crossSellingTypes"
+                                            :key="option.value"
+                                            :value="option.value">
+                                        {{ option.label }}
+                                    </option>
+                                </sw-select-field>
+                            {% endblock %}
+                            {% block sw_prduct_cross_selling_form_position_field %}
+                                <sw-number-field
+                                    numberType="int"
+                                    :min="1"
+                                    :label="$tc('sw-product.crossselling.inputCrossSellingPosition')"
+                                    :error="crossSellingPositionError"
+                                    :placeholder="$tc('sw-product.crossselling.inputCrossSellingPositionPlaceholder')"
+                                    v-model="crossSelling.position">
+                                </sw-number-field>
+                            {% endblock %}
+                        </sw-container>
+                    {% endblock %}
 
                     <div v-if="!useManualAssignment">
                         {% block sw_prduct_cross_selling_form_product_stream_field %}
@@ -75,28 +79,30 @@
                             </sw-entity-single-select>
                         {% endblock %}
 
-                        <sw-container columns="1fr 1fr" gap="0px 30px">
-                            {% block sw_prduct_cross_selling_form_sort_field %}
-                                <sw-select-field
-                                    :label="$tc('sw-product.crossselling.inputCrossSellingSorting')"
-                                    :value="sortingConCat"
-                                    @change="onSortingChanged">
-                                    <option v-for="option in sortingTypes"
-                                            :key="option.value"
-                                            :value="option.value">
-                                        {{ option.label }}
-                                    </option>
-                                </sw-select-field>
-                            {% endblock %}
+                        {% block sw_prduct_cross_selling_form_sort_field_container %}
+                            <sw-container columns="1fr 1fr" gap="0px 30px">
+                                {% block sw_prduct_cross_selling_form_sort_field %}
+                                    <sw-select-field
+                                        :label="$tc('sw-product.crossselling.inputCrossSellingSorting')"
+                                        :value="sortingConCat"
+                                        @change="onSortingChanged">
+                                        <option v-for="option in sortingTypes"
+                                                :key="option.value"
+                                                :value="option.value">
+                                            {{ option.label }}
+                                        </option>
+                                    </sw-select-field>
+                                {% endblock %}
 
-                            {% block sw_prduct_cross_selling_form_limit_field %}
-                                <sw-number-field
-                                    numberType="int"
-                                    :label="$tc('sw-product.crossselling.inputCrossSellingLimit')"
-                                    v-model="crossSelling.limit">
-                                </sw-number-field>
-                            {% endblock %}
-                        </sw-container>
+                                {% block sw_prduct_cross_selling_form_limit_field %}
+                                    <sw-number-field
+                                        numberType="int"
+                                        :label="$tc('sw-product.crossselling.inputCrossSellingLimit')"
+                                        v-model="crossSelling.limit">
+                                    </sw-number-field>
+                                {% endblock %}
+                            </sw-container>
+                        {% endblock %}
 
                         {% block sw_prduct_cross_selling_form_preview_link %}
                             <sw-container columns="1fr" justify="end" class="sw-product-cross-selling-form__links">

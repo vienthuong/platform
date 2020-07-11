@@ -87,74 +87,77 @@
 
                             {% block sw_order_create_base_line_items_summary %}
                                 <sw-card-section v-show="cartLineItems.length" divider="top" secondary slim>
-                                    <sw-container columns="1fr 440px"
-                                                  gap="14px"
-                                                  class="sw-order-create-summary">
-                                        <div>
-                                            {% block sw_order_create_base_line_items_switch_promotions %}
-                                                <sw-switch-field class="sw-order-create-summary__switch-promotions"
-                                                                 :label="$tc('sw-order.promotionModal.labelTitle')"
-                                                                 v-model="disabledAutoPromotionVisibility">
-                                                </sw-switch-field>
-                                            {% endblock %}
-                                            {% block sw_order_create_base_line_items_voucher_field %}
-                                                <sw-order-promotion-tag-field
-                                                    :disabled="!hasLineItem"
-                                                    :currency="currency"
-                                                    :label="$tc('sw-order.createBase.labelAddPromotion')"
-                                                    v-model="promotionCodeTags"
-                                                    :placeholder="$tc('sw-order.createBase.placeholderAddPromotion')"
-                                                    @on-remove-code="onRemoveExistingCode"
-                                                    :error="promotionError">
-                                                </sw-order-promotion-tag-field>
-                                            {% endblock %}
-                                        </div>
-                                        <sw-description-list grid="265px 1fr"
-                                                             class="sw-order-create-summary__data">
-                                            {% block sw_order_create_base_line_items_summary_entries %}
-                                                {% block sw_order_create_base_line_items_summary_amount %}
-                                                    <dt>{{ $tc('sw-order.createBase.summaryLabelAmount') }}</dt>
-                                                    <dd>{{ (cartPrice ? cartPrice.positionPrice : 0) | currency(currency.shortName) }}</dd>
+                                    {% block sw_order_create_base_line_items_summary_container %}
+                                        <sw-container columns="1fr 440px"
+                                                      gap="14px"
+                                                      class="sw-order-create-summary">
+                                            <div>
+                                                {% block sw_order_create_base_line_items_switch_promotions %}
+                                                    <sw-switch-field class="sw-order-create-summary__switch-promotions"
+                                                                     :label="$tc('sw-order.promotionModal.labelTitle')"
+                                                                     v-model="disabledAutoPromotionVisibility">
+                                                    </sw-switch-field>
                                                 {% endblock %}
+                                                {% block sw_order_create_base_line_items_voucher_field %}
+                                                    <sw-order-promotion-tag-field
+                                                        :disabled="!hasLineItem"
+                                                        :currency="currency"
+                                                        :label="$tc('sw-order.createBase.labelAddPromotion')"
+                                                        v-model="promotionCodeTags"
+                                                        :placeholder="$tc('sw-order.createBase.placeholderAddPromotion')"
+                                                        @on-remove-code="onRemoveExistingCode"
+                                                        :error="promotionError">
+                                                    </sw-order-promotion-tag-field>
+                                                {% endblock %}
+                                            </div>
+                                            <sw-description-list grid="265px 1fr"
+                                                                 class="sw-order-create-summary__data">
+                                                {% block sw_order_create_base_line_items_summary_entries %}
+                                                    {% block sw_order_create_base_line_items_summary_amount %}
+                                                        <dt>{{ $tc('sw-order.createBase.summaryLabelAmount') }}</dt>
+                                                        <dd>{{ (cartPrice ? cartPrice.positionPrice : 0) | currency(currency.shortName) }}</dd>
+                                                    {% endblock %}
 
-                                                {% block sw_order_create_base_line_items_summary_shipping_cost %}
-                                                    <template v-if="cartDelivery">
-                                                        <dt>{{ $tc('sw-order.createBase.summaryLabelShippingCosts') }}</dt>
-                                                        <dd>
-                                                            <sw-order-saveable-field type="number"
-                                                                                     editable
-                                                                                     v-tooltip="{ showDelay: 300, message: shippingCostsDetail }"
-                                                                                     :value="cartDelivery.shippingCosts.totalPrice"
-                                                                                     @value-change="onShippingChargeEdited">
-                                                                {{ cartDelivery.shippingCosts.totalPrice | currency(currency.shortName) }}
-                                                            </sw-order-saveable-field>
-                                                        </dd>
-                                                    </template>
-                                                    <template v-if="cartDeliveryDiscounts" v-for="delivery in cartDeliveryDiscounts">
-                                                        <dt>{{ $tc('sw-order.createBase.discountLabelShippingCosts') }}</dt>
-                                                        <dd>{{ delivery.shippingCosts.totalPrice | currency(currency.shortName) }}</dd>
-                                                    </template>
-                                                {% endblock %}
+                                                    {% block sw_order_create_base_line_items_summary_shipping_cost %}
+                                                        <template v-if="cartDelivery">
+                                                            <dt>{{ $tc('sw-order.createBase.summaryLabelShippingCosts') }}</dt>
+                                                            <dd>
+                                                                <sw-order-saveable-field type="number"
+                                                                                         editable
+                                                                                         v-tooltip="{ showDelay: 300, message: shippingCostsDetail }"
+                                                                                         :value="cartDelivery.shippingCosts.totalPrice"
+                                                                                         @value-change="onShippingChargeEdited">
+                                                                    {{ cartDelivery.shippingCosts.totalPrice | currency(currency.shortName) }}
+                                                                </sw-order-saveable-field>
+                                                            </dd>
+                                                        </template>
+                                                        <template v-if="cartDeliveryDiscounts" v-for="delivery in cartDeliveryDiscounts">
+                                                            <dt>{{ $tc('sw-order.createBase.discountLabelShippingCosts') }}</dt>
+                                                            <dd>{{ delivery.shippingCosts.totalPrice | currency(currency.shortName) }}</dd>
+                                                        </template>
+                                                    {% endblock %}
 
-                                                {% block sw_order_create_base_line_items_summary_amount_without_tax %}
-                                                    <dt><strong>{{ $tc('sw-order.createBase.summaryLabelAmountWithoutTaxes') }}</strong></dt>
-                                                    <dd><strong>{{ (cartPrice ? cartPrice.netPrice : 0) | currency(currency.shortName) }}</strong></dd>
-                                                {% endblock %}
+                                                    {% block sw_order_create_base_line_items_summary_amount_without_tax %}
+                                                        <dt><strong>{{ $tc('sw-order.createBase.summaryLabelAmountWithoutTaxes') }}</strong></dt>
+                                                        <dd><strong>{{ (cartPrice ? cartPrice.netPrice : 0) | currency(currency.shortName) }}</strong></dd>
+                                                    {% endblock %}
 
-                                                {% block sw_order_create_base_line_items_summary_taxes %}
-                                                    <template v-for="calculatedTax in filteredCalculatedTaxes">
-                                                        <dt>{{ $tc('sw-order.createBase.summaryLabelTaxes', 1, { taxRate: calculatedTax.taxRate }) }}</dt>
-                                                        <dd>{{ calculatedTax.tax | currency(currency.shortName) }}</dd>
-                                                    </template>
-                                                {% endblock %}
+                                                    {% block sw_order_create_base_line_items_summary_taxes %}
+                                                        <template v-for="calculatedTax in filteredCalculatedTaxes">
+                                                            <dt>{{ $tc('sw-order.createBase.summaryLabelTaxes', 1, { taxRate: calculatedTax.taxRate }) }}</dt>
+                                                            <dd>{{ calculatedTax.tax | currency(currency.shortName) }}</dd>
+                                                        </template>
+                                                    {% endblock %}
 
-                                                {% block sw_order_create_base_line_items_summary_amount_total %}
-                                                    <dt><strong>{{ $tc('sw-order.createBase.summaryLabelAmountTotal') }}</strong></dt>
-                                                    <dd><strong>{{ (cartPrice ? cartPrice.totalPrice : 0) | currency(currency.shortName) }}</strong></dd>
+                                                    {% block sw_order_create_base_line_items_summary_amount_total %}
+                                                        <dt><strong>{{ $tc('sw-order.createBase.summaryLabelAmountTotal') }}</strong></dt>
+                                                        <dd><strong>{{ (cartPrice ? cartPrice.totalPrice : 0) | currency(currency.shortName) }}</strong></dd>
+                                                    {% endblock %}
                                                 {% endblock %}
-                                            {% endblock %}
-                                        </sw-description-list>
-                                    </sw-container>
+                                            </sw-description-list>
+                                        </sw-container>
+                                    {% endblock %}
+
                                 </sw-card-section>
                             {% endblock %}
                         </sw-container>

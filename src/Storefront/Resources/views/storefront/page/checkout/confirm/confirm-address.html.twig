@@ -30,7 +30,7 @@
                                         csrfToken: sw_csrf("frontend.account.addressbook", {"mode": "token"})
                                     } %}
 
-                                    {% block  page_checkout_confirm_address_billing_actions_link %}
+                                    {% block page_checkout_confirm_address_billing_actions_link %}
                                         <a href="{{ path('frontend.account.address.edit.page', {'addressId': billingAddress.id}) }}"
                                            title="{{ "account.overviewChangeBilling"|trans|striptags }}"
                                            class="btn btn-light"
@@ -80,7 +80,7 @@
                                         csrfToken: sw_csrf("frontend.account.addressbook", {"mode": "token"})
                                     } %}
 
-                                    {% block  page_checkout_confirm_address_shipping_actions_link %}
+                                    {% block page_checkout_confirm_address_shipping_actions_link %}
                                         <a href="{{ path('frontend.account.address.edit.page', {'addressId': shippingAddress.id}) }}"
                                            title="{{ "account.overviewChangeShipping"|trans|striptags }}"
                                            class="btn btn-light"

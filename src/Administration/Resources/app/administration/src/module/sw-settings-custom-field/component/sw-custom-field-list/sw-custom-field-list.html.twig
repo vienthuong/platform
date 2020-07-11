@@ -3,36 +3,40 @@
              class="sw-custom-field-list">
         {% block sw_custom_field_list_toolbar %}
             <div class="sw-custom-field-list__toolbar">
-                <sw-container columns="1fr 32px minmax(100px, 200px)" gap="0 10px">
-                    {% block sw_custom_field_list_toolbar_searchfield %}
-                        <sw-simple-search-field
-                            size="small"
-                            variant="form"
-                            v-model="term">
-                        </sw-simple-search-field>
-                    {% endblock %}
 
-                    {% block sw_custom_field_list_toolbar_delete %}
-                        <sw-button
-                                :disabled="deleteButtonDisabled"
-                                @click="onDeleteCustomFields"
-                                square
+                {% block sw_custom_field_list_toolbar_searchfield_container %}
+                    <sw-container columns="1fr 32px minmax(100px, 200px)" gap="0 10px">
+                        {% block sw_custom_field_list_toolbar_searchfield %}
+                            <sw-simple-search-field
                                 size="small"
-                                class="sw-custom-field-list__delete-button">
-                            <sw-icon name="default-action-trash" small />
-                        </sw-button>
-                    {% endblock %}
+                                variant="form"
+                                v-model="term">
+                            </sw-simple-search-field>
+                        {% endblock %}
 
-                    {% block sw_custom_field_list_toolbar_add %}
-                        <sw-button
-                                :disabled="set.isLoading"
-                                @click="onAddCustomField(set)"
-                                size="small"
-                                class="sw-custom-field-list__add-button">
-                            {{ $tc('sw-settings-custom-field.set.detail.addCustomField') }}
-                        </sw-button>
-                    {% endblock %}
-                </sw-container>
+                        {% block sw_custom_field_list_toolbar_delete %}
+                            <sw-button
+                                    :disabled="deleteButtonDisabled"
+                                    @click="onDeleteCustomFields"
+                                    square
+                                    size="small"
+                                    class="sw-custom-field-list__delete-button">
+                                <sw-icon name="default-action-trash" small />
+                            </sw-button>
+                        {% endblock %}
+
+                        {% block sw_custom_field_list_toolbar_add %}
+                            <sw-button
+                                    :disabled="set.isLoading"
+                                    @click="onAddCustomField(set)"
+                                    size="small"
+                                    class="sw-custom-field-list__add-button">
+                                {{ $tc('sw-settings-custom-field.set.detail.addCustomField') }}
+                            </sw-button>
+                        {% endblock %}
+                    </sw-container>
+                {% endblock %}
+                
             </div>
         {% endblock %}
 

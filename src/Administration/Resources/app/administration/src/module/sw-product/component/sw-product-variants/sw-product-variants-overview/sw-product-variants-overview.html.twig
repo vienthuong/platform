@@ -27,41 +27,44 @@
 
                                 {% block sw_product_variants_overview_option_list_toolbar_container_filter_context_menu %}
                                     <sw-context-menu v-show="filterWindowOpen">
-                                        <sw-container columns="1fr" gap="5px">
 
-                                            {% block sw_product_variants_overview_option_list_toolbar_container_button_filter_reset %}
-                                                <sw-button @click="resetFilterOptions()">
-                                                    {{ $tc('sw-product.variations.overview.filterReset') }}
-                                                </sw-button>
-                                            {% endblock %}
-                                            {% block sw_product_variants_overview_option_list_toolbar_container_button_update_list %}
-                                                <sw-button variant="primary" @click="getList()">
-                                                    {{ $tc('sw-product.variations.overview.filter') }}
-                                                </sw-button>
-                                            {% endblock %}
+                                        {% block sw_product_variants_overview_option_list_toolbar_container_filter_context_menu_container %}
+                                            <sw-container columns="1fr" gap="5px">
 
-                                            {% block sw_product_variants_overview_option_list_toolbar_container_filter_tree %}
-                                                <sw-tree v-show="filterOptions.length"
-                                                         :sortable="false"
-                                                         :items="filterOptions"
-                                                         :searchable="false"
-                                                         :disableContextMenu="true"
-                                                         bindItemsToFolder>
-                                                    <template slot="items"
-                                                              slot-scope="{ treeItems, sortable, draggedItem, disableContextMenu, onChangeRoute, checkItem }">
-                                                        <sw-tree-item
-                                                                v-for="(item, index) in treeItems"
-                                                                :sortable="false"
-                                                                :key="item.id"
-                                                                :item="item"
-                                                                @check-item="filterOptionChecked"
-                                                                :disableContextMenu="true">
-                                                        </sw-tree-item>
-                                                    </template>
-                                                </sw-tree>
-                                            {% endblock %}
+                                                {% block sw_product_variants_overview_option_list_toolbar_container_button_filter_reset %}
+                                                    <sw-button @click="resetFilterOptions()">
+                                                        {{ $tc('sw-product.variations.overview.filterReset') }}
+                                                    </sw-button>
+                                                {% endblock %}
+                                                {% block sw_product_variants_overview_option_list_toolbar_container_button_update_list %}
+                                                    <sw-button variant="primary" @click="getList()">
+                                                        {{ $tc('sw-product.variations.overview.filter') }}
+                                                    </sw-button>
+                                                {% endblock %}
 
-                                        </sw-container>
+                                                {% block sw_product_variants_overview_option_list_toolbar_container_filter_tree %}
+                                                    <sw-tree v-show="filterOptions.length"
+                                                             :sortable="false"
+                                                             :items="filterOptions"
+                                                             :searchable="false"
+                                                             :disableContextMenu="true"
+                                                             bindItemsToFolder>
+                                                        <template slot="items"
+                                                                  slot-scope="{ treeItems, sortable, draggedItem, disableContextMenu, onChangeRoute, checkItem }">
+                                                            <sw-tree-item
+                                                                    v-for="(item, index) in treeItems"
+                                                                    :sortable="false"
+                                                                    :key="item.id"
+                                                                    :item="item"
+                                                                    @check-item="filterOptionChecked"
+                                                                    :disableContextMenu="true">
+                                                            </sw-tree-item>
+                                                        </template>
+                                                    </sw-tree>
+                                                {% endblock %}
+
+                                            </sw-container>
+                                        {% endblock %}
                                     </sw-context-menu>
                                 {% endblock %}
                             </div>
